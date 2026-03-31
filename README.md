@@ -1,9 +1,8 @@
 # @philiprehberger/state-machine
 
 [![CI](https://github.com/philiprehberger/ts-state-machine/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/ts-state-machine/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@philiprehberger/state-machine)](https://www.npmjs.com/package/@philiprehberger/state-machine)
-[![License](https://img.shields.io/github/license/philiprehberger/ts-state-machine)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
+[![npm version](https://img.shields.io/npm/v/@philiprehberger/state-machine.svg)](https://www.npmjs.com/package/@philiprehberger/state-machine)
+[![Last updated](https://img.shields.io/github/last-commit/philiprehberger/ts-state-machine)](https://github.com/philiprehberger/ts-state-machine/commits/main)
 
 Typed finite state machine with transition guards, effects, and subscriptions.
 
@@ -110,6 +109,24 @@ npm test
 npm run typecheck
 ```
 
+## Support
+
+If you find this project useful:
+
+⭐ [Star the repo](https://github.com/philiprehberger/ts-state-machine)
+
+🐛 [Report issues](https://github.com/philiprehberger/ts-state-machine/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+💡 [Suggest features](https://github.com/philiprehberger/ts-state-machine/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
+
+❤️ [Sponsor development](https://github.com/sponsors/philiprehberger)
+
+🌐 [All Open Source Projects](https://philiprehberger.com/open-source-packages)
+
+💻 [GitHub Profile](https://github.com/philiprehberger)
+
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/philiprehberger)
+
 ## License
 
-MIT
+[MIT](LICENSE)
