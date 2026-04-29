@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Add `machine.nextState(event)` to preview the target state for an event without transitioning (respects guards)
+- Add `machine.reset()` to restore the machine to its initial state and context, firing onExit/onEnter and notifying subscribers
+- Remove trailing period from README one-liner to match the standard template
+
 ## 0.1.2
 
 - Standardize README to 3-badge format with emoji Support section

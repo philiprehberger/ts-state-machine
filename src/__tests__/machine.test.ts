@@ -194,4 +194,41 @@ describe('createMachine', () => {
       machine.send('GO');
     }, /not a defined state/);
   });
+
+  it('nextState() previews target without transitioning', () => {
+    const machine = trafficLight();
+    assert.equal(machine.nextState('START'), 'loading');
+    assert.equal(machine.state, 'idle');
+    assert.equal(machine.nextState('UNKNOWN'), undefined);
+  });
+
+  it('nextState() respects guards', () => {
+    const machine = createMachine({
+      initial: 'a',
+      context: { allow: false },
+      states: {
+        a: { on: { GO: { target: 'b', guard: (ctx) => (ctx as { allow: boolean }).allow } } },
+        b: {},
+      },
+    });
+    assert.equal(machine.nextState('GO'), undefined);
+  });
+
+  it('reset() restores initial state and context', () => {
+    const enter = mock.fn();
+    const machine = createMachine({
+      initial: 'idle',
+      context: { count: 0 },
+      states: {
+        idle: { on: { START: 'busy' }, onEnter: enter },
+        busy: {},
+      },
+    });
+    machine.send('START');
+    assert.equal(machine.state, 'busy');
+    machine.reset();
+    assert.equal(machine.state, 'idle');
+    assert.deepEqual(machine.context, { count: 0 });
+    assert.ok(enter.mock.callCount() >= 1);
+  });
 });

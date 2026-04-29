@@ -9,6 +9,7 @@ export function createMachine(config: MachineConfig): MachineInstance {
 
   let currentState = initial;
   let context = config.context;
+  const initialContext = config.context;
   const listeners = new Set<(state: string, ctx: unknown) => void>();
 
   function resolveTransition(
@@ -91,6 +92,32 @@ export function createMachine(config: MachineConfig): MachineInstance {
         return false;
       }
       return true;
+    },
+
+    nextState(event: string): string | undefined {
+      const transition = resolveTransition(event);
+      if (!transition) return undefined;
+      if (transition.guard && !transition.guard(context)) return undefined;
+      return transition.target;
+    },
+
+    reset(): void {
+      const exitConfig = states[currentState];
+      if (currentState !== initial && exitConfig?.onExit) {
+        exitConfig.onExit(context);
+      }
+
+      currentState = initial;
+      context = initialContext;
+
+      const enterConfig = states[currentState];
+      if (enterConfig?.onEnter) {
+        enterConfig.onEnter(context);
+      }
+
+      for (const listener of listeners) {
+        listener(currentState, context);
+      }
     },
   };
 

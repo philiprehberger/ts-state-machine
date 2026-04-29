@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/@philiprehberger/state-machine.svg)](https://www.npmjs.com/package/@philiprehberger/state-machine)
 [![Last updated](https://img.shields.io/github/last-commit/philiprehberger/ts-state-machine)](https://github.com/philiprehberger/ts-state-machine/commits/main)
 
-Typed finite state machine with transition guards, effects, and subscriptions.
+Typed finite state machine with transition guards, effects, and subscriptions
 
 ## Installation
 
@@ -88,6 +88,25 @@ machine.send('TOGGLE'); // logs: State changed to: on
 unsubscribe();
 ```
 
+### Previewing Transitions and Resetting
+
+```ts
+import { createMachine } from '@philiprehberger/state-machine';
+
+const machine = createMachine({
+  initial: 'idle',
+  states: {
+    idle: { on: { START: 'busy' } },
+    busy: { on: { STOP: 'idle' } },
+  },
+});
+
+machine.nextState('START'); // 'busy' — preview without transitioning
+machine.send('START');
+machine.reset();
+machine.state; // 'idle' — restored to initial state and context
+```
+
 ## API
 
 | Function | Description |
@@ -96,6 +115,8 @@ unsubscribe();
 | `machine.send(event)` | Send an event to trigger a transition |
 | `machine.matches(state)` | Check if the machine is in a given state |
 | `machine.can(event)` | Check if an event can trigger a transition |
+| `machine.nextState(event)` | Preview the target state for an event without transitioning |
+| `machine.reset()` | Restore the machine to its initial state and context |
 | `machine.subscribe(listener)` | Subscribe to state changes; returns unsubscribe function |
 | `machine.state` | Current state (readonly) |
 | `machine.context` | Current context (readonly) |

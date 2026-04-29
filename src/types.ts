@@ -22,4 +22,6 @@ export interface MachineInstance {
   matches(state: string): boolean;
   subscribe(listener: (state: string, ctx: unknown) => void): () => void;
   can(event: string): boolean;
+  nextState(event: string): string | undefined;
+  reset(): void;
 }
